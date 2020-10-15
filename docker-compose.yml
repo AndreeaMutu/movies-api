@@ -3,13 +3,17 @@ volumes:
   postgres-data: { }
 services:
   movies-api:
-    #build: .
-    image: andica92/movies-api:latest
+    build: .
+    #image: andica92/movies-api:latest
     depends_on:
       - database
     ports:
       - "8080:8080"
     restart: on-failure
+    environment:
+      SPRING_DATASOURCE_URL: "jdbc:postgresql://database:5432/movie"
+      SPRING_DATASOURCE_USERNAME: movie
+      SPRING_DATASOURCE_PASSWORD: movie
   database:
     image: postgres:latest
     ports:
