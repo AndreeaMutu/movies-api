@@ -1,5 +1,11 @@
-FROM openjdk:11
+FROM maven:3.6.3-openjdk-11-slim AS build
+RUN mkdir -p /workspace
+WORKDIR /workspace
+COPY pom.xml /workspace
+COPY src /workspace/src
+RUN mvn -B -f pom.xml clean package -DskipTests
+
+FROM openjdk:11-jdk-slim
 EXPOSE 8080
-ADD ./target/movies-api-0.0.1-SNAPSHOT.jar /usr/src/app.jar
-WORKDIR usr/src
+COPY --from=build /workspace/target/*.jar app.jar
 ENTRYPOINT ["java","-jar", "app.jar"]
