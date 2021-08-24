@@ -1,4 +1,4 @@
-# movies-api
+# movies-api readme
 Docker demo - spring boot app with postgresql database for storing and reading favorite movies
 Week 2 assignment of https://github.com/datastaxdevs/docker-learning-path/tree/master/week-2
 
